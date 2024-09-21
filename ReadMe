@@ -1,0 +1,21 @@
+javac -d virtual_class_room_manager\bin virtual_class_room_manager\src\com\example\VirtualClassRoomManager.java
+javac -d virtual_class_room_manager\bin virtual_class_room_manager\src\com\example\TeacherClient.java
+javac -d virtual_class_room_manager\bin virtual_class_room_manager\src\com\example\StudentClient.java
+
+java -cp virtual_class_room_manager\bin virtual_class_room_manager.src.com.example.VirtualClassRoomManager
+
+java -cp virtual_class_room_manager\bin virtual_class_room_manager.src.com.example.TeacherClient
+
+java -cp virtual_class_room_manager\bin virtual_class_room_manager.src.com.example.StudentClient
+
+
+new :: 
+javac -d virtual_classroom_manager\bin virtual_classroom_manager\src\com\example\TeacherClient.java
+javac -d virtual_classroom_manager\bin virtual_classroom_manager\src\com\example\StudentClient.java
+javac -d virtual_classroom_manager\bin virtual_classroom_manager\src\com\example\VirtualClassRoomManager.java
+
+java -cp virtual_classroom_manager\bin virtual_classroom_manager.src.com.example.VirtualClassRoomManager
+
+java -cp virtual_classroom_manager\bin virtual_classroom_manager.src.com.example.TeacherClient
+
+java -cp virtual_classroom_manager\bin virtual_classroom_manager.src.com.example.StudentClient
