@@ -16,39 +16,18 @@ public class TeacherClient {
             
             BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
 
-            output.println("Teacher"); // Send the role
+            output.println("Teacher 3"); // Send the role and Id
 
-            // String command;
+            String command;
 
-            String[] commands = {
-                "add_classroom nij",
-                "add_classroom nij",
-                "add_student 1 nij",
-                "add_student 1 nij",
-                "add_assignment 1 nij",
-                "add_assignment 1 nij"
-            };    
-            
-            // Loop over the predefined commands
-            for (int i = 0; i < commands.length; i++) {
-                String command = commands[i]; // Get the current command
-                
-                // Send the command to the server
-                output.println(command);
-                
-                // Get the response from the server
+            while (true) {
+                System.out.print("Enter command (add_classroom / add_student / schedule_assignment / list_student): ");
+                command = console.readLine();
+                output.println(command); // Send command to server
+
                 String response = input.readLine();
                 System.out.println("Server: " + response);
             }
-
-            // while (true) {
-            //     System.out.print("Enter command (add_classroom / add_student / schedule_assignment / list_student): ");
-            //     command = console.readLine();
-            //     output.println(command); // Send command to server
-
-            //     String response = input.readLine();
-            //     System.out.println("Server: " + response);
-            // }
         } catch (IOException e) {
             e.printStackTrace();
         }
