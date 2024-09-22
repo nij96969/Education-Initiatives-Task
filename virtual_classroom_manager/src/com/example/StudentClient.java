@@ -8,27 +8,34 @@ import java.net.Socket;
 
 public class StudentClient {
     public static void main(String[] args) {
+        // Try to establish a connection to the server
         try (Socket socket = new Socket("localhost", 8080)) {
             
+            // Input stream to read responses from the server
             BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            
+            // Output stream to send commands to the server
             PrintWriter output = new PrintWriter(socket.getOutputStream(), true);
-            
+            // Input stream to read commands from the console
             BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
 
-            output.println("Student 1"); // Send the role and Id
+            // Send the role and ID of the student
+            output.println("Student 1");
 
-            String command;
+            String command = "start server";
 
-            while (true) {
-                System.out.print("Enter command (add_classroom / add_student / schedule_assignment / list_student): ");
-                command = console.readLine();
-                output.println(command); // Send command to server
+            while (!command.equalsIgnoreCase("exit")) {
+                // Prompt the user for a command
+                System.out.print("Enter command (list_classroom / submit_assignment / list_assignments): ");
+                command = console.readLine();  // Read command from the console
+                output.println(command);  // Send the command to the server
 
+                // Read the server's response
                 String response = input.readLine();
                 System.out.println("Server: " + response);
             }
         } catch (IOException e) {
+            // Handle IOException that may occur if the server is down
+            System.err.println("Error: Unable to connect to the server. Please check if the server is running.");
             e.printStackTrace();
         }
     }

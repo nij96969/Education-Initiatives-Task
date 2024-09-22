@@ -1,24 +1,32 @@
 package virtual_classroom_manager.src.com.example;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class VirtualClassRoomManager {
+    private static final Logger logger = Logger.getLogger(VirtualClassRoomManager.class.getName());
     public static boolean startServer = true;
     public static Map<String, Classroom> classrooms = new HashMap<>();
 
     public static void main(String[] args) {
         try (ServerSocket serverSocket = new ServerSocket(8080)) {
-            System.out.println("Server started, waiting for users to connect.....");
+            logger.info("Server started, waiting for users to connect.....");
 
             while (startServer) {
-                Socket socket = serverSocket.accept();
-                new ClientHandler(socket).start();  // Start a new thread for each client
+                try {
+                    Socket socket = serverSocket.accept();
+                    new ClientHandler(socket).start();  // Start a new thread for each client
+                } catch (IOException e) {
+                    logger.log(Level.SEVERE, "Error accepting connection", e);
+                }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Could not start server on port 8080", e);
         }
     }
 }
