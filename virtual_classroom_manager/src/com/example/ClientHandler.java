@@ -16,6 +16,8 @@ public class ClientHandler extends Thread {
     private PrintWriter output;
     private String userType;
     private String userIdString;
+    private TeacherFunctionality teacherFunctionality;
+    private StudentFunctionality studentFunctionality;
 
     public ClientHandler(Socket socket) {
         this.socket = socket;
@@ -40,6 +42,18 @@ public class ClientHandler extends Thread {
 
             logger.info(userType + " connected with user ID " + userIdString);
 
+            // Initialize functionality based on user role
+            if (Utility.isTeacher(userType)) {
+                teacherFunctionality = new TeacherFunctionality(userIdString);
+            } else if (Utility.isStudent(userType)) {
+                // Assuming StudentImpl can be created or retrieved by userIdString
+                StudentImpl student = getStudentById(userIdString);
+                studentFunctionality = new StudentFunctionality(student);
+            } else {
+                output.println("Invalid user type. Connection will be closed.");
+                return;
+            }
+
             String command;
             while ((command = input.readLine()) != null) {
                 if (command.equalsIgnoreCase("exit")) {
@@ -49,7 +63,11 @@ public class ClientHandler extends Thread {
                 
                 // Handle the command and catch any potential exceptions
                 try {
-                    UserFunctionality.handleCommand(userType, userIdString, command, output);
+                    if (Utility.isTeacher(userType)) {
+                        teacherFunctionality.handleCommand(command, output);
+                    } else {
+                        studentFunctionality.handleCommand(command, output);
+                    }
                 } catch (Exception e) {
                     output.println("Error processing command: " + e.getMessage());
                     logger.log(Level.SEVERE, "Error processing command: " + command, e);
@@ -58,10 +76,16 @@ public class ClientHandler extends Thread {
         } catch (SocketException e) {
             logger.warning("Connection is lost with user ID " + userIdString);
         } catch (IOException e) {
-            logger.log(Level.SEVERE, "I/O error occured for user ID " + userIdString, e);
+            logger.log(Level.SEVERE, "I/O error occurred for user ID " + userIdString, e);
         } finally {
             closeConnection();
         }
+    }
+
+    // Method to get the student object by ID (stub implementation)
+    private StudentImpl getStudentById(String userIdString) {
+        // Implement logic to retrieve the StudentImpl object by userIdString
+        return new StudentImpl(userIdString); // Placeholder
     }
 
     // Close resources and log disconnection

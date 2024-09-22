@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-
+import java.util.Scanner;
 public class StudentClient {
     public static void main(String[] args) {
         // Try to establish a connection to the server
@@ -18,10 +18,16 @@ public class StudentClient {
             // Input stream to read commands from the console
             BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
 
-            // Send the role and ID of the teacher
-            output.println("Student 1");
+            Scanner scan = new Scanner(System.in);
 
-            String command = "start connection";
+            // Prompt the user for their Student ID
+            System.out.print("Enter your Student ID: ");
+            String studentId = scan.nextLine();  // Read the student ID from the console
+
+            // Send the role and ID of the student
+            output.println("Student " + studentId);
+
+            String command = "start server";
             try {
                 while (!command.equalsIgnoreCase("exit")) {
                     // Prompt the user for a command
@@ -36,7 +42,8 @@ public class StudentClient {
             } catch (Exception e) {
                 System.err.println("Server not responding or got disconnected");
             }
-
+            scan.close();
+            
         } catch (IOException e) {
             // Handle IOException that may occur if the server is down
             System.err.println("Error: Unable to connect to the server. Please check if the server is running.");
