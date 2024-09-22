@@ -14,7 +14,7 @@ public class UserFunctionality {
             return;
         }
 
-        switch (commandName) {
+        switch (commandName.trim()) {
 
             case "add_classroom": //Minimum inputCommand Size :: 2
                 addClassroom(userType, userIdString, inputCommand, output);
@@ -234,16 +234,17 @@ public class UserFunctionality {
         String assignmentName = inputCommand[1];
         String classroomName = inputCommand[2];
 
-        if (!Utility.isClassroomUnderSameTeacher(userIdString, classroomName)) {
-            output.println("Classroom " + classroomName + " does not belong to you.");
-            return;
-        }
-
+        
         if (!Utility.doesClassroomExist(classroomName)) {
             output.println("Classroom " + classroomName + " does not exist.");
             return;
         }
-
+        
+        if (!Utility.isClassroomUnderSameTeacher(userIdString, classroomName)) {
+            output.println("Classroom " + classroomName + " does not belong to you.");
+            return;
+        }
+        
         if (!Utility.doesAssignmentExistInClassroom(assignmentName, classroomName)) {
             output.println("Assignment " + assignmentName + " does not exist in the classroom.");
             return;

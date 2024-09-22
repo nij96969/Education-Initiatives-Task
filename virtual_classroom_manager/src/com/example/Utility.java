@@ -39,28 +39,39 @@ public class Utility {
         // Check if the classroom is not null before verifying the teacher
         return classroom != null && classroom.isSameTeacher(teacherId);
     }
-
+    
     public static boolean isValidCommand(String commandName, int length, PrintWriter output) {
-        switch (commandName) {
+        switch (commandName.trim()) {
             case "add_classroom":
-                return length >= 2 || printInvalidArguments(output, "add_classroom requires at least 2 arguments.");
+                if (length < 2) return printInvalidArguments(output, "add_classroom requires at least 2 arguments.");
+                return true;
             case "list_classroom":
-                return length >= 1 || printInvalidArguments(output, "list_classroom requires at least 1 argument.");
+                if (length < 1) return printInvalidArguments(output, "list_classroom requires at least 1 argument.");
+                return true;
             case "remove_class":
-                return length >= 2 || printInvalidArguments(output, "remove_class requires at least 2 arguments.");
+                if (length < 2) return printInvalidArguments(output, "remove_class requires at least 2 arguments.");
+                return true;
             case "add_student":
-                return length >= 3 || printInvalidArguments(output, "add_student requires at least 3 arguments.");
+                if (length < 3) return printInvalidArguments(output, "add_student requires at least 3 arguments.");
+                return true;
             case "add_assignment":
-                return length >= 3 || printInvalidArguments(output, "add_assignment requires at least 3 arguments.");
+                if (length < 3) return printInvalidArguments(output, "add_assignment requires at least 3 arguments.");
+                return true;
             case "submit_assignment":
-                return length >= 3 || printInvalidArguments(output, "submit_assignment requires at least 3 arguments.");
+                if (length < 3) return printInvalidArguments(output, "submit_assignment requires at least 3 arguments.");
+                return true;
             case "list_submitted_assignment":
-                return length >= 3 || printInvalidArguments(output, "list_submitted_assignment requires at least 3 arguments.");
+                if (length < 3) return printInvalidArguments(output, "list_submitted_assignment requires at least 3 arguments.");
+                return true;
             case "list_students":
-                return length >= 2 || printInvalidArguments(output, "list_students requires at least 2 arguments.");
+                if (length < 2) return printInvalidArguments(output, "list_students requires at least 2 arguments.");
+                return true;
             case "list_assignments":
-                return length >= 2 || printInvalidArguments(output, "list_assignments requires at least 2 arguments.");
+                if (length < 2) return printInvalidArguments(output, "list_assignments requires at least 2 arguments.");
+                return true;
             default:
+                // Handle unknown commands
+                output.println("Invalid command: " + commandName);
                 return false;
         }
     }
@@ -70,3 +81,4 @@ public class Utility {
         return false;
     }
 }
+
