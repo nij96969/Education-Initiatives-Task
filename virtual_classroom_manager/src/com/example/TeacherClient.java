@@ -21,17 +21,20 @@ public class TeacherClient {
             // Send the role and ID of the teacher
             output.println("Teacher 1");
 
-            String command = "start server";
-
-            while (!command.equalsIgnoreCase("exit")) {
-                // Prompt the user for a command
-                System.out.print("Enter command (add_classroom / list_classroom / remove_class / add_student / list_students / add_assignment / list_submitted_assignment / list_assignments / exit): ");
-                command = console.readLine();  // Read command from the console
-                output.println(command);  // Send the command to the server
-
-                // Read the server's response
-                String response = input.readLine();
-                System.out.println("Server: " + response);
+            String command = "start connection";
+            try {
+                while (!command.equalsIgnoreCase("exit")) {
+                    // Prompt the user for a command
+                    System.out.print("Enter command (add_classroom / list_classroom / remove_class / add_student / list_students / add_assignment / list_submitted_assignment / list_assignments / exit): ");
+                    command = console.readLine();  // Read command from the console
+                    output.println(command);  // Send the command to the server
+    
+                    // Read the server's response
+                    String response = input.readLine();
+                    System.out.println("Server: " + response);
+                }
+            } catch (Exception e) {
+                System.err.println("Server not responding or got disconnected");
             }
         } catch (IOException e) {
             // Handle IOException that may occur if the server is down

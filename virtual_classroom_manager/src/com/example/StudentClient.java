@@ -18,21 +18,25 @@ public class StudentClient {
             // Input stream to read commands from the console
             BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
 
-            // Send the role and ID of the student
+            // Send the role and ID of the teacher
             output.println("Student 1");
 
-            String command = "start server";
-
-            while (!command.equalsIgnoreCase("exit")) {
-                // Prompt the user for a command
-                System.out.print("Enter command (list_classroom / submit_assignment / list_assignments): ");
-                command = console.readLine();  // Read command from the console
-                output.println(command);  // Send the command to the server
-
-                // Read the server's response
-                String response = input.readLine();
-                System.out.println("Server: " + response);
+            String command = "start connection";
+            try {
+                while (!command.equalsIgnoreCase("exit")) {
+                    // Prompt the user for a command
+                    System.out.print("Enter command (list_assignments / submit_assignment / list_classroom / exit): ");
+                    command = console.readLine();  // Read command from the console
+                    output.println(command);  // Send the command to the server
+    
+                    // Read the server's response
+                    String response = input.readLine();
+                    System.out.println("Server: " + response);
+                }
+            } catch (Exception e) {
+                System.err.println("Server not responding or got disconnected");
             }
+
         } catch (IOException e) {
             // Handle IOException that may occur if the server is down
             System.err.println("Error: Unable to connect to the server. Please check if the server is running.");
