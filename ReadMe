@@ -1,20 +1,79 @@
-javac -d virtual_class_room_manager\bin virtual_class_room_manager\src\com\example\VirtualClassRoomManager.java
-javac -d virtual_class_room_manager\bin virtual_class_room_manager\src\com\example\TeacherClient.java
-javac -d virtual_class_room_manager\bin virtual_class_room_manager\src\com\example\StudentClient.java
+Virtual Classroom Manager - Readme
 
-java -cp virtual_class_room_manager\bin virtual_class_room_manager.src.com.example.VirtualClassRoomManager
+This project implements a simple terminal-based Virtual Classroom Manager using Java and a Client-Server architecture with persistent connections.
 
-java -cp virtual_class_room_manager\bin virtual_class_room_manager.src.com.example.TeacherClient
+Features:
 
-java -cp virtual_class_room_manager\bin virtual_class_room_manager.src.com.example.StudentClient
+Teacher functionalities:
 
-new :: 
-javac -d virtual_classroom_manager\bin virtual_classroom_manager\src\com\example\TeacherClient.java
-javac -d virtual_classroom_manager\bin virtual_classroom_manager\src\com\example\StudentClient.java
-javac -d virtual_classroom_manager\bin virtual_classroom_manager\src\com\example\VirtualClassRoomManager.java
+Create new classrooms. {add_classroom <classroom_name>}
 
-java -cp virtual_classroom_manager\bin virtual_classroom_manager.src.com.example.VirtualClassRoomManager
+List all classrooms created by the teacher. {list_classroom}
 
-java -cp virtual_classroom_manager\bin virtual_classroom_manager.src.com.example.TeacherClient
+Delete classrooms. {remove_classroom <classroom_name>}
 
-java -cp virtual_classroom_manager\bin virtual_classroom_manager.src.com.example.StudentClient
+Add students to existing classrooms. {add_student <student_id> <classroom_name>}
+
+List all students enrolled in a specific classroom. {list_students <classroom_name>}
+
+Add assignments to classrooms. {add_assignment <assignment_name> <classroom_name>}
+
+List all assignments for a specific classroom. {list_assignments <classroom_name>}
+
+List students who have submitted a specific assignment in a specific classroom. {list_submitted_assignment <assignment_name> <classroom_name>}
+
+Exit the application.
+
+Student functionalities:
+list_assignments / submit_assignment / list_classroom / exit
+List all assignments in a specific classroom. {list_assignments <classroom_name>}
+
+Submit an assignment to a specific classroom. {submit_assignment <assignment_name> <classroom_name>}
+
+List all classrooms the student is enrolled in. {list_classroom}
+
+Exit the application.
+
+Implementation:
+
+The project uses Java sockets for communication between the server and clients (teacher and student applications).
+
+Each client establishes a persistent connection with the server.
+
+The server handles multiple clients concurrently using threads.
+
+The server maintains a Classroom object for each classroom, which stores information about the classroom, teacher, students, and assignments.
+
+The server also implements TeacherFunctionality and StudentFunctionality classes that handle specific commands from the teacher and student clients.
+
+The project uses a Utility class to encapsulate helper functions for verifying user roles, classroom existence, assignment existence, student enrollment, etc.
+
+Running the Application:
+
+Compile the code:
+
+javac virtual_classroom_manager\src\com\example\*.java
+
+Start the server:
+
+java -cp virtual_classroom_manager\src com.example.VirtualClassRoomManager
+
+Run the client applications:
+
+Teacher Client:
+
+java -cp virtual_classroom_manager\src\com\example\TeacherClient
+
+Student Client:
+
+java -cp virtual_classroom_manager\src\com\example\StudentClient
+
+Notes:
+
+The server runs on port 8080 by default. You can modify this in the VirtualClassRoomManager class.
+
+The clients connect to the server on localhost:8080.
+
+The client applications are terminal-based and provide prompts for user input.
+
+The project includes a StudentImpl and TeacherImpl class, which represent the actual implementation of the Student and Teacher interfaces.

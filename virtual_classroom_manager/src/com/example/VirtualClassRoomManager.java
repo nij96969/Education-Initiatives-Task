@@ -12,9 +12,10 @@ public class VirtualClassRoomManager {
     private static final Logger logger = Logger.getLogger(VirtualClassRoomManager.class.getName());
     public static boolean startServer = true;
     public static Map<String, Classroom> classrooms = new HashMap<>();
+    private static Integer port = 8080;
 
     public static void main(String[] args) {
-        try (ServerSocket serverSocket = new ServerSocket(8080)) {
+        try (ServerSocket serverSocket = new ServerSocket(port)) {
             logger.info("Server started, waiting for users to connect.....");
 
             while (startServer) {
