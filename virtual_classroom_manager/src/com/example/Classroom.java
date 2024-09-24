@@ -27,11 +27,6 @@ public class Classroom {
     public boolean isSameTeacher(String teacherId) {
         return teacherIdString.equals(teacherId);
     }
-
-    // Check if the provided teacher ID matches this classroom's teacher ID
-    public boolean isMatchTeacherId(String teacherIdString) {
-        return teacherIdString.equals(this.teacherIdString);
-    }
     
     // Add a new assignment to the classroom
     public void addAssignment(String assignment) {
