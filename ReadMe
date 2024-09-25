@@ -52,22 +52,29 @@ Running the Application:
 
 Compile the code:
 
-javac -cp "your_directory....\bin" -d "your_directory....\bin" "virtual_classroom_manager\src\com\example\*.java"
+mkdir bin
+
+javac -cp "bin" -d "bin" "virtual_classroom_manager\src\com\example\*.java"
 
 Start the server:
 
-java -cp "your_directory....\bin" "virtual_classroom_manager.src.com.example.VirtualClassRoomManager"
+java -cp "bin" "virtual_classroom_manager.src.com.example.VirtualClassRoomManager"
 
 Run the client applications:
 
 Teacher Client:
 
-java -cp "your_directory....\bin" "virtual_classroom_manager.src.com.example.TeacherClient"
+java -cp "bin" "virtual_classroom_manager.src.com.example.TeacherClient"
+
+afterwards
+//Enter Teacher Id as 1 for example
 
 Student Client:
 
-java -cp "your_directory....\bin" "virtual_classroom_manager.src.com.example.StudentClient"
+java -cp "bin" "virtual_classroom_manager.src.com.example.StudentClient"
 
+afterwards
+//Enter Student Id as 1 for example
 
 Notes:
 
@@ -78,3 +85,13 @@ The clients connect to the server on localhost:8080.
 The client applications are terminal-based and provide prompts for user input.
 
 The project includes a StudentImpl and TeacherImpl class, which represent the actual implementation of the Student and Teacher interfaces.
+
+For Teacher client predefined command are executed : 
+            "add_classroom nij",
+            "add_student 1 nij",
+            "add_assignment ass1 nij"
+
+For Student client u can use commands such as :
+            "list_classroom",
+            "list_assignments nij",
+            "submit_assignment ass1 nij"
