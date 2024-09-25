@@ -52,21 +52,22 @@ Running the Application:
 
 Compile the code:
 
-javac virtual_classroom_manager\src\com\example\*.java
+javac -cp "your_directory....\bin" -d "your_directory....\bin" "virtual_classroom_manager\src\com\example\*.java"
 
 Start the server:
 
-java -cp virtual_classroom_manager\src com.example.VirtualClassRoomManager
+java -cp "your_directory....\bin" "virtual_classroom_manager.src.com.example.VirtualClassRoomManager"
 
 Run the client applications:
 
 Teacher Client:
 
-java -cp virtual_classroom_manager\src\com\example\TeacherClient
+java -cp "your_directory....\bin" "virtual_classroom_manager.src.com.example.TeacherClient"
 
 Student Client:
 
-java -cp virtual_classroom_manager\src\com\example\StudentClient
+java -cp "your_directory....\bin" "virtual_classroom_manager.src.com.example.StudentClient"
+
 
 Notes:
 
